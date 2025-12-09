@@ -1,0 +1,231 @@
+﻿/* Clean, final CSS for header, sidebar and responsive behaviors */
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 0;
+    padding: 0;
+    background: #ffffff;
+}
+
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 18px 24px;
+    background: linear-gradient(90deg, #1b4fa8, #6b21e8, #c21878);
+    border-bottom: 1px solid #0c0c0c;
+}
+
+.logo {
+    text-decoration: none;
+    color: #eaecea;
+    font-weight: 900;
+    font-size: 1.3rem;
+    display: inline-flex;
+    align-items: center;
+}
+
+.logo i {
+    margin-right: 12px;
+    color: #c51717;
+}
+
+.navbar a {
+    margin-left: 11px;
+    color: #ffffff;
+    text-decoration: none;
+    text-transform: capitalize;
+}
+
+.icons {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.icon-home,
+.icon-menu,
+.icon-search {
+    color: #ffffff;
+    font-size: 1.3rem;
+    cursor: pointer;
+}
+
+.icon-home:hover,
+.icon-menu:hover,
+.icon-search:hover {
+    color: #003cff;
+}
+
+
+/* Search (desktop) */
+
+.search-container {
+    display: none;
+    align-items: center;
+    gap: 8px;
+}
+
+.search-box {
+    padding: 6px 10px;
+    border-radius: 6px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    background: rgba(255, 255, 255, 0.06);
+    color: #fff;
+    min-width: 220px;
+}
+
+.search-box::placeholder {
+    color: rgba(255, 255, 255, 0.7);
+}
+
+
+/* Sidebar */
+
+.sidebar {
+    position: fixed;
+    right: -300px;
+    top: 64px;
+    /* start below header */
+    width: 300px;
+    height: calc(100vh - 64px);
+    background: linear-gradient(180deg, #1b4fa8, #6b21e8, #c21878);
+    padding: 20px 0;
+    z-index: 1000;
+    transition: right .3s ease;
+    overflow-y: auto;
+}
+
+.sidebar.active {
+    right: 0;
+}
+
+.sidebar a {
+    display: block;
+    padding: 15px 25px;
+    color: #fff;
+    text-decoration: none;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.sidebar a i {
+    margin-right: 12px;
+}
+
+.sidebar-overlay {
+    position: fixed;
+    top: 64px;
+    /* overlay only covers content below header */
+    left: 0;
+    right: 0;
+    height: calc(100vh - 64px);
+    background: rgba(0, 0, 0, 0.5);
+    display: none;
+    z-index: 999;
+}
+
+.sidebar-overlay.active {
+    display: block;
+}
+
+
+/* Mobile: center logo, hide navbar, show hamburger (moved slightly down) */
+
+@media (max-width: 768px) {
+    .header {
+        padding: 12px 16px;
+        position: relative;
+    }
+    .logo {
+        font-size: 1.6rem;
+        text-align: center;
+        margin: 0 auto;
+    }
+    .logo i {
+        font-size: 1.6rem;
+        margin-right: 8px;
+    }
+    .navbar {
+        display: none;
+    }
+    .search-container {
+        display: none;
+    }
+    /* kembalikan ikon menu sejajar vertikal dengan logo */
+    .icons {
+        position: absolute;
+        right: 16px;
+        top: 50%;
+        transform: translateY(-50%);
+    }
+    /* Tombol menu: lingkaran, bayangan, kontras lebih baik */
+    .icon-menu {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 44px;
+        height: 44px;
+        font-size: 1.15rem;
+        background: rgba(255, 255, 255, 0.09);
+        padding: 0;
+        border-radius: 50%;
+        border: 1px solid rgba(255, 255, 255, 0.14);
+        box-shadow: 0 6px 14px rgba(0, 0, 0, 0.18);
+        backdrop-filter: blur(4px);
+        transition: transform .12s ease, background .12s ease, box-shadow .12s ease;
+    }
+    .icon-menu:hover {
+        transform: translateY(-3px);
+        background: rgba(255, 255, 255, 0.14);
+        box-shadow: 0 8px 18px rgba(0, 0, 0, 0.22);
+        color: #003cff;
+    }
+    .icon-menu:active {
+        transform: scale(.98);
+    }
+}
+
+
+/* Small phones: make logo larger, keep menu icon moved down */
+
+@media (max-width: 480px) {
+    .header {
+        padding: 12px 16px;
+        position: relative;
+    }
+    .logo {
+        font-size: 1.8rem;
+    }
+    .logo i {
+        font-size: 1.8rem;
+    }
+    .icons {
+        right: 12px;
+        top: 50%;
+        transform: translateY(-50%);
+    }
+    .icon-menu {
+        width: 40px;
+        height: 40px;
+        font-size: 1.1rem;
+    }
+}
+
+
+/* Desktop: show search, hide hamburger */
+
+@media (min-width: 769px) {
+    .search-container {
+        display: flex;
+    }
+    .icon-menu {
+        display: none;
+    }
+    .icons {
+        position: static;
+    }
+}
